@@ -28,7 +28,8 @@ See Other. Redirecting to /blobs/c7c6df76-53f8-47ff-acfa-3bee20e895e8
 
 `GET` from `http://immut.io/:id` with an optional `type` query parameter.
 Immut.io will respond with status 200 with the blob contents, transferred
-with the `Content-Type` specified, defaulting to `text/plain`.
+with the `Content-Type` specified, defaulting to the `Content-Type` it
+was originally uploaded with.
 
 Example cURL Request
 
