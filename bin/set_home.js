@@ -1,7 +1,7 @@
 var Immutio = require('immutio-client'),
     fs = require('fs'),
     path = require('path'),
-    index = fs.readFileSync(path.resolve(__dirname, '../views/index.md')),
+    index = fs.readFileSync(path.resolve(__dirname, '../views/index.md'), { encoding: 'utf-8' }),
     exec = require('child_process').exec,
     im = new Immutio();
 
