@@ -27,6 +27,7 @@ blobSchema.static('getBlob', function (id, cb) {
     uuid: id
   }, function (err, doc) {
     if(err) return cb(err);
+    if(!doc) return cb();
     cb(null, doc.data);
   });
 });
