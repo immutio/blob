@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "home": "node bin/set_home.js"
   },
   "author": "Trey Griffith <trey@tgriff3.com>",
   "license": "MIT",
@@ -14,5 +15,8 @@
     "mongoose": "^4.0.1",
     "node-uuid": "^1.4.3",
     "xxhashjs": "^0.1.1"
+  },
+  "devDependencies": {
+    "immutio-client": "^0.0.1"
   }
 }
