@@ -26,8 +26,6 @@ blobSchema.static('setBlob', function (data, cb) {
   var hash = xxhash(data, 0).toString(16);
   var length = data.length;
 
-  console.log("data to store", data);
-
   this.findOne({
     xxhash: hash,
     length: length
