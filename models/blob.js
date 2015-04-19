@@ -11,24 +11,32 @@ var blobSchema = mongoose.Schema({
   },
   xxhash: {
     type: String,
-    index: {
-      unique: true
-    }
+    index: true
   },
   length: {
     type: Number,
     index: true
   },
+  contentType: {
+    type: String,
+    default: "text/plain"
+  },
   data: mongoose.Schema.Types.Buffer
 });
 
-blobSchema.static('setBlob', function (data, cb) {
+blobSchema.static('setBlob', function (data, type, cb) {
   var hash = xxhash(data, 0).toString(16);
   var length = data.length;
+  type = type || 'text/plain';
+
+  if(type === 'application/x-www-form-urlencoded' || type === 'multipart/form-data') {
+    type = 'text/plain';
+  }
 
   this.findOne({
     xxhash: hash,
-    length: length
+    length: length,
+    contentType: type
   }, function (err, doc) {
     if(err) return cb(err);
     if(doc) return cb(null, doc.uuid);
@@ -37,6 +45,7 @@ blobSchema.static('setBlob', function (data, cb) {
       uuid: uuid(),
       xxhash: hash,
       length: length,
+      contentType: type,
       data: data
     }, function (err, doc) {
       if(err) return cb(err);
@@ -52,7 +61,7 @@ blobSchema.static('getBlob', function (id, cb) {
   }, function (err, doc) {
     if(err) return cb(err);
     if(!doc) return cb();
-    cb(null, doc.data);
+    cb(null, doc.data, doc.contentType);
   });
 });
 

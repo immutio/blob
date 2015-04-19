@@ -15,18 +15,18 @@ function routes(app) {
     if(!Buffer.isBuffer(req.body)) {
       return res.status(400).send("Request body is required");
     }
-    Blob.setBlob(req.body, function (err, id) {
+    Blob.setBlob(req.body, req.get('content-type'), function (err, id) {
       if(err) return next(err);
       res.redirect(303, '/blobs/' + id);
     });
   });
 
   app.get('/blobs/:uuid', function (req, res, next) {
-    Blob.getBlob(req.params.uuid, function (err, data) {
+    Blob.getBlob(req.params.uuid, function (err, data, type) {
       if(err) return next(err);
       if(data == null) return res.sendStatus(404);
 
-      var type = req.query.type || 'text/plain';
+      type = req.query.type || type || 'text/plain';
       res.set('Content-Type', type);
       res.send(data);
     });
