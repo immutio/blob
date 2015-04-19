@@ -4,6 +4,9 @@ var indexView = fs.readFileSync('views/index.md');
 
 function routes(app) {
   app.get('/', function (req, res) {
+    if(process.env.HOME_URL) {
+      return res.redirect(process.env.HOME_URL);
+    }
     res.set('Content-Type', 'text/plain');
     res.send(indexView);
   });
