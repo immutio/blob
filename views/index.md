@@ -20,7 +20,7 @@ curl --data "my blob" http://immut.io/blobs
 cURL Response
 
 ```
-See Other. Redirecting to /blobs/78e62f51-9241-4c06-a486-3f2b81b893dd
+See Other. Redirecting to /blobs/c7c6df76-53f8-47ff-acfa-3bee20e895e8
 ```
 
 ### Retrieve a Blob
@@ -32,7 +32,7 @@ with the `Content-Type` specified, defaulting to `text/plain`.
 cURL Request
 
 ```
-curl http://immut.io/blobs/78e62f51-9241-4c06-a486-3f2b81b893dd
+curl http://immut.io/blobs/c7c6df76-53f8-47ff-acfa-3bee20e895e8
 ```
 
 cURL Response
