@@ -2,8 +2,10 @@ immut.io
 ========
 Immutable Blob Store
 
-Set
----
+Usage
+-----
+
+### Set
 
 Sample Request
 
@@ -17,8 +19,7 @@ Expected Response
 78e62f51-9241-4c06-a486-3f2b81b893dd
 ```
 
-Get
----
+### Get
 
 Sample Request
 
@@ -32,3 +33,9 @@ Expected Response
 my blob
 ```
 
+Limits
+------
+
+1MB limit on all blobs.
+
+Need more space or features? contact hello@immut.io

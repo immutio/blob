@@ -8,19 +8,20 @@ function routes(app) {
     res.send(indexView);
   });
 
-  app.post('/blobs', function (req, res) {
-    Blob.setBlob(req.rawBody, function (err, id) {
-      if(err) return res.sendStatus(500);
-      res.set('Content-Type', 'text/plain');
-      res.send(id);
+  app.post('/blobs', function (req, res, next) {
+    Blob.setBlob(req.body, function (err, id) {
+      if(err) return next(err);
+      res.redirect(303, '/blobs/' + id);
     });
   });
 
-  app.get('/blobs/:uuid', function (req, res) {
+  app.get('/blobs/:uuid', function (req, res, next) {
     Blob.getBlob(req.params.uuid, function (err, data) {
-      if(err) return res.sendStatus(500);
+      if(err) return next(err);
       if(data == null) return res.sendStatus(404);
-      res.set('Content-Type', 'text/plain');
+
+      var type = req.query.type || 'text/plain';
+      res.set('Content-Type', type);
       res.send(data);
     });
   });

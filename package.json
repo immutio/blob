@@ -9,8 +9,10 @@
   "author": "Trey Griffith <trey@tgriff3.com>",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.12.3",
     "express": "^4.12.3",
     "mongoose": "^4.0.1",
-    "node-uuid": "^1.4.3"
+    "node-uuid": "^1.4.3",
+    "xxhashjs": "^0.1.1"
   }
 }

@@ -1,4 +1,5 @@
 var mongoose = require('mongoose'),
+    xxhash = require('xxhashjs'),
     uuid = require('node-uuid').v4;
 
 var blobSchema = mongoose.Schema({
@@ -8,18 +9,41 @@ var blobSchema = mongoose.Schema({
       unique: true
     }
   },
-  data: mongoose.Schema.Types.Mixed
+  xxhash: {
+    type: String,
+    index: {
+      unique: true
+    }
+  },
+  length: {
+    type: Number,
+    index: true
+  },
+  data: mongoose.Schema.Types.Buffer
 });
 
 blobSchema.static('setBlob', function (data, cb) {
-  var id = uuid();
-  Blob.create({
-    uuid: id,
-    data: data
+  var hash = xxhash(data, 0).toString(16);
+  var length = data.length;
+
+  this.findOne({
+    xxhash: hash,
+    length: length
   }, function (err, doc) {
     if(err) return cb(err);
-    cb(null, doc.uuid);
-  });
+    if(doc) return cb(null, doc.uuid);
+
+    this.create({
+      uuid: uuid(),
+      xxhash: hash,
+      length: length,
+      data: data
+    }, function (err, doc) {
+      if(err) return cb(err);
+      cb(null, doc.uuid);
+    });
+
+  }.bind(this));
 });
 
 blobSchema.static('getBlob', function (id, cb) {
