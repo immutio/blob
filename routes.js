@@ -11,7 +11,7 @@ function routes(app) {
     res.send(indexView);
   });
 
-  app.post('/blobs', function (req, res, next) {
+  function handleUpload(req, res, next) {
     if(!Buffer.isBuffer(req.body)) {
       return res.status(400).send("Request body is required");
     }
@@ -19,7 +19,10 @@ function routes(app) {
       if(err) return next(err);
       res.redirect(303, '/blobs/' + id);
     });
-  });
+  }
+
+  app.post('/blobs', handleUpload);
+  app.put('/blobs', handleUpload);
 
   app.get('/blobs/:uuid', function (req, res, next) {
     Blob.getBlob(req.params.uuid, function (err, data, type) {
