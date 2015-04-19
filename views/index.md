@@ -44,7 +44,7 @@ my blob
 Client Libraries
 ----------------
 
-- [Official Javascript Client](http://github.com/immutio/node-immut.io-client)
+- [Official Javascript Client](http://github.com/immutio/immutio-js-client)
 
 
 Limits
