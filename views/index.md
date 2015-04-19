@@ -9,15 +9,16 @@ Usage
 ### Save a Blob
 
 `POST` to `http://immut.io/blobs` with the blob as the request body.
-Immut.io will respond with status 303 with the location of the saved blob.
+Immut.io will respond with status 303 with the url of the blob in the
+`Location` header.
 
-cURL Request
+Example cURL Request
 
 ```
 curl --data "my blob" http://immut.io/blobs
 ```
 
-cURL Response
+Example cURL Response
 
 ```
 See Other. Redirecting to /blobs/c7c6df76-53f8-47ff-acfa-3bee20e895e8
@@ -29,22 +30,24 @@ See Other. Redirecting to /blobs/c7c6df76-53f8-47ff-acfa-3bee20e895e8
 Immut.io will respond with status 200 with the blob contents, transferred
 with the `Content-Type` specified, defaulting to `text/plain`.
 
-cURL Request
+Example cURL Request
 
 ```
-curl http://immut.io/blobs/c7c6df76-53f8-47ff-acfa-3bee20e895e8
+curl http://immut.io/blobs/c7c6df76-53f8-47ff-acfa-3bee20e895e8?type=text/plain
 ```
 
-cURL Response
+Example cURL Response
 
 ```
 my blob
 ```
 
+
 Client Libraries
 ----------------
 
-- [Official Javascript Client](http://github.com/immutio/immutio-js-client)
+- [Javascript Client](http://github.com/immutio/immutio-js-client)
+
 
 
 Limits
