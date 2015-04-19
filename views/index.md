@@ -1,37 +1,51 @@
 immut.io
 ========
-Immutable Blob Store
+An Immutable Blob Store.
+
 
 Usage
 -----
 
-### Set
+### Save a Blob
 
-Sample Request
+`POST` to `http://immut.io/blobs` with the blob as the request body.
+Immut.io will respond with status 303 with the location of the saved blob.
+
+cURL Request
 
 ```
 curl --data "my blob" http://immut.io/blobs
 ```
 
-Expected Response
+cURL Response
 
 ```
-78e62f51-9241-4c06-a486-3f2b81b893dd
+See Other. Redirecting to /blobs/78e62f51-9241-4c06-a486-3f2b81b893dd
 ```
 
-### Get
+### Retrieve a Blob
 
-Sample Request
+`GET` from `http://immut.io/:sid` with an optional `type` query parameter.
+Immut.io will respond with status 200 with the blob contents, transferred
+with the `Content-Type` specified, defaulting to `text/plain`.
+
+cURL Request
 
 ```
 curl http://immut.io/blobs/78e62f51-9241-4c06-a486-3f2b81b893dd
 ```
 
-Expected Response
+cURL Response
 
 ```
 my blob
 ```
+
+Client Libraries
+----------------
+
+- [Official Javascript Client](http://github.com/immutio/node-immut.io-client)
+
 
 Limits
 ------
