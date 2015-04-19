@@ -9,6 +9,9 @@ function routes(app) {
   });
 
   app.post('/blobs', function (req, res, next) {
+    if(!Buffer.isBuffer(req.body)) {
+      return res.status(400).send("Request body is required");
+    }
     Blob.setBlob(req.body, function (err, id) {
       if(err) return next(err);
       res.redirect(303, '/blobs/' + id);
