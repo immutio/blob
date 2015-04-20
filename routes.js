@@ -39,7 +39,7 @@ function routes(app) {
 
       // send the uuid of this object as a hack around XHR's stupid
       // limitations around redirects
-      res.set('immutio-blob-id', req.params.uuid);
+      res.set('Immutio-Blob-Id', req.params.uuid);
 
       res.send(data);
     });

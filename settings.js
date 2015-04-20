@@ -3,7 +3,8 @@ function settings(app) {
   app.settings.cors = {
     origin: true,
     methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'HEAD'],
-    exposedHeaders: ['immutio-blob-id']
+    exposedHeaders: ['Immutio-Blob-Id', 'Content-Type', 'Content-Length'],
+    allowHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept']
   };
 }
 
