@@ -1,6 +1,7 @@
-var Blob = require('./models/blob');
-var fs = require('fs');
-var indexView = fs.readFileSync('views/index.md');
+var Blob = require('./models/blob'),
+    cors = require('cors'),
+    fs = require('fs'),
+    indexView = fs.readFileSync('views/index.md');
 
 function routes(app) {
   app.get('/', function (req, res) {
@@ -21,6 +22,7 @@ function routes(app) {
     });
   }
 
+  app.options('/blobs', cors());
   app.post('/blobs', handleUpload);
   app.put('/blobs', handleUpload);
 
