@@ -12,6 +12,10 @@ function routes(app) {
     res.send(indexView);
   });
 
+  app.get('/paste', function (req, res) {
+    return res.redirect(process.env.PASTE_URL);
+  });
+
   function handleUpload(req, res, next) {
     if(!Buffer.isBuffer(req.body)) {
       return res.status(400).send("Request Body and Content-Type are required");

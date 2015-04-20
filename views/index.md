@@ -44,10 +44,17 @@ my blob
 ```
 
 
+Uses
+----
+- [Pastebin](http://immut.io/paste)
+- Do you have novel use for immut.io? Submit it to hello@immut.io
+
+
 Client Libraries
 ----------------
 
 - [Javascript Client](http://github.com/immutio/immutio-js-client)
+- Have you written a client library? Submit it to hello@immut.io
 
 
 
