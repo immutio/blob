@@ -14,11 +14,11 @@ function routes(app) {
 
   function handleUpload(req, res, next) {
     if(!Buffer.isBuffer(req.body)) {
-      return res.status(400).send("Request body is required");
+      return res.status(400).send("Request Body and Content-Type are required");
     }
     Blob.setBlob(req.body, req.get('content-type'), function (err, id) {
       if(err) return next(err);
-      res.redirect(303, '/blobs/' + id);
+      res.send('/blobs/' + id);
     });
   }
 
