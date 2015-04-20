@@ -1,8 +1,8 @@
 var bodyParser = require('body-parser'),
-    cors = require('cors')
+    cors = require('cors');
 
 function middleware(app) {
-  app.use(cors());
+  app.use(cors(app.settings.cors));
   app.use(bodyParser.raw({
     type: '*/*',
     limit: '1mb'

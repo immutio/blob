@@ -22,7 +22,7 @@ function routes(app) {
     });
   }
 
-  app.options('/blobs', cors());
+  app.options('/blobs', cors(app.settings.cors));
   app.post('/blobs', handleUpload);
   app.put('/blobs', handleUpload);
 
