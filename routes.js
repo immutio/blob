@@ -31,8 +31,16 @@ function routes(app) {
       if(err) return next(err);
       if(data == null) return res.sendStatus(404);
 
+      // set the content type giving priority to the query string,
+      // then to the content type of the stored data, and defaulting to
+      // text/plain
       type = req.query.type || type || 'text/plain';
       res.set('Content-Type', type);
+
+      // send the uuid of this object as a hack around XHR's stupid
+      // limitations around redirects
+      res.set('immutio-blob-id', req.params.uuid);
+
       res.send(data);
     });
   });
