@@ -5,15 +5,20 @@ An Immutable Blob Store.
 CLI
 ---
 
-Upload a photo
+Install `im`
 
 ```
 $ curl -sL immut.io/sh | sh
+```
+
+Upload a photo
+
+```
 $ im myPhoto.jpg
 http://immut.io/blobs/c7c6df76-53f8-47ff-acfa-3bee20e895e8
 ```
 
-And save the url to your clipboard
+Save the blob URL to your clipboard (on OS X)
 
 ```
 $ im myPhoto.jpg | pbcopy
