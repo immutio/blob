@@ -46,9 +46,9 @@ function routes(app) {
   app.put('/blobs', limiterMiddleware, handleUpload);
 
   app.get('/blobs/:uuid', function (req, res, next) {
-    Blob.getBlob(req.params.uuid, function (err, data, type) {
+    Blob.getBlob(req.params.uuid, function (err, dataStream, type) {
       if(err) return next(err);
-      if(data == null) return res.sendStatus(404);
+      if(dataStream == null) return res.sendStatus(404);
 
       // set the content type giving priority to the query string,
       // then to the content type of the stored data, and defaulting to
@@ -56,11 +56,11 @@ function routes(app) {
       type = req.query.type || type || 'text/plain';
       res.set('Content-Type', type);
 
-      // send the uuid of this object as a hack around XHR's stupid
-      // limitations around redirects
+      // send the uuid of this object
       res.set('Immutio-Blob-Id', req.params.uuid);
 
-      res.send(data);
+      // stream to the client
+      res.pipe(dataStream);
     });
   });
 }

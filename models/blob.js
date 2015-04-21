@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
     xxhash = require('xxhashjs'),
+    s3 = require('./s3'),
     uuid = require('node-uuid').v4;
 
 var blobSchema = mongoose.Schema({
@@ -41,16 +42,22 @@ blobSchema.static('setBlob', function (data, type, cb) {
     if(err) return cb(err);
     if(doc) return cb(null, doc.uuid);
 
-    this.create({
-      uuid: uuid(),
-      xxhash: hash,
-      length: length,
-      contentType: type,
-      data: data
-    }, function (err, doc) {
+    var id = uuid();
+
+    s3.put(id, data, function (err) {
       if(err) return cb(err);
-      cb(null, doc.uuid);
-    });
+
+      this.create({
+        uuid: uuid(),
+        xxhash: hash,
+        length: length,
+        contentType: type
+      }, function (err, doc) {
+        if(err) return cb(err);
+        cb(null, doc.uuid);
+      });
+
+    }.bind(this));
 
   }.bind(this));
 });
@@ -61,7 +68,7 @@ blobSchema.static('getBlob', function (id, cb) {
   }, function (err, doc) {
     if(err) return cb(err);
     if(!doc) return cb();
-    cb(null, doc.data, doc.contentType);
+    cb(null, s3.getStream(doc.uuid), doc.contentType);
   });
 });
 
