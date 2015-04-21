@@ -15,12 +15,7 @@ in the response body.
 Example cURL Request
 
 ```
-curl --data "my blob" http://immut.io/blobs
-```
-
-Example cURL Response
-
-```
+$ curl --data "my blob" http://immut.io/blobs
 /blobs/c7c6df76-53f8-47ff-acfa-3bee20e895e8
 ```
 
@@ -34,12 +29,7 @@ was originally uploaded with.
 Example cURL Request
 
 ```
-curl http://immut.io/blobs/c7c6df76-53f8-47ff-acfa-3bee20e895e8?type=text/plain
-```
-
-Example cURL Response
-
-```
+$ curl http://immut.io/blobs/c7c6df76-53f8-47ff-acfa-3bee20e895e8?type=text/plain
 my blob
 ```
 
