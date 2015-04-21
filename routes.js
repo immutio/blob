@@ -54,6 +54,10 @@ function routes(app) {
       // send the uuid of this object
       res.set('Immutio-Blob-Id', req.params.uuid);
 
+      // set cache control to 1 year in the future
+      // https://developer.yahoo.com/performance/rules.html#expires
+      res.cacheControl({ maxAge: 31536000 });
+
       // stream to the client
       dataStream.pipe(res);
     });
