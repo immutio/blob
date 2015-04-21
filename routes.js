@@ -17,6 +17,10 @@ function routes(app) {
     return res.redirect(process.env.PASTE_URL);
   });
 
+  app.get('/sh', function (req, res) {
+    return res.redirect(process.env.SH_URL);
+  });
+
   function handleUpload(req, res, next) {
     if(!Buffer.isBuffer(req.body)) {
       return res.status(400).send("Request Body and Content-Type are required");

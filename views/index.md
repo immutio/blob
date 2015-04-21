@@ -2,9 +2,25 @@ immut.io
 ========
 An Immutable Blob Store.
 
+CLI
+---
 
-Usage
------
+Upload a photo
+
+```
+$ curl immut.io/sh | sh
+$ im myPhoto.jpg
+http://immut.io/blobs/c7c6df76-53f8-47ff-acfa-3bee20e895e8
+```
+
+And save the url to your clipboard
+
+```
+$ im myPhoto.jpg | pbcopy
+```
+
+API
+---
 
 ### Save a Blob
 
@@ -44,6 +60,7 @@ Client Libraries
 ----------------
 
 - [Javascript Client](http://github.com/immutio/immutio-js-client)
+- [Shell Client](http://github.com/immutio/immutio-sh-client)
 - Have you written a client library? Submit it to hello@immut.io
 
 
