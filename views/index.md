@@ -64,8 +64,8 @@ Uses
 Client Libraries
 ----------------
 
-- [Javascript Client](http://github.com/immutio/immutio-js-client)
-- [Shell Client](http://github.com/immutio/immutio-sh-client)
+- [Javascript](http://github.com/immutio/immutio-js-client)
+- [Shell](http://github.com/immutio/immutio-sh-client)
 - Have you written a client library? Submit it to hello@immut.io
 
 
