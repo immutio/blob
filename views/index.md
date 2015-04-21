@@ -8,7 +8,7 @@ CLI
 Upload a photo
 
 ```
-$ curl immut.io/sh | sh
+$ curl -sL immut.io/sh | sh
 $ im myPhoto.jpg
 http://immut.io/blobs/c7c6df76-53f8-47ff-acfa-3bee20e895e8
 ```
