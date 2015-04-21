@@ -21,8 +21,7 @@ var blobSchema = mongoose.Schema({
   contentType: {
     type: String,
     default: "text/plain"
-  },
-  data: mongoose.Schema.Types.Buffer
+  }
 });
 
 blobSchema.static('setBlob', function (data, type, cb) {
