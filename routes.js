@@ -46,21 +46,26 @@ function routes(app) {
   app.put('/blobs', limiterMiddleware, handleUpload);
 
   app.get('/blobs/:uuid', function (req, res, next) {
-    Blob.getBlob(req.params.uuid, function (err, dataStream, type) {
+    Blob.getBlob(req.params.uuid, function (err, dataStream, type, length) {
       if(err) return next(err);
       if(dataStream == null) return res.sendStatus(404);
+
+      dataStream.on('error', function (err) {
+        next(err);
+      });
 
       // set the content type giving priority to the query string,
       // then to the content type of the stored data, and defaulting to
       // text/plain
       type = req.query.type || type || 'text/plain';
       res.set('Content-Type', type);
+      res.set('Content-Length', length);
 
       // send the uuid of this object
       res.set('Immutio-Blob-Id', req.params.uuid);
 
       // stream to the client
-      res.pipe(dataStream);
+      dataStream.pipe(res);
     });
   });
 }

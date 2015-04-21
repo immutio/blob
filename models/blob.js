@@ -48,7 +48,7 @@ blobSchema.static('setBlob', function (data, type, cb) {
       if(err) return cb(err);
 
       this.create({
-        uuid: uuid(),
+        uuid: id,
         xxhash: hash,
         length: length,
         contentType: type
@@ -68,7 +68,7 @@ blobSchema.static('getBlob', function (id, cb) {
   }, function (err, doc) {
     if(err) return cb(err);
     if(!doc) return cb();
-    cb(null, s3.getStream(doc.uuid), doc.contentType);
+    cb(null, s3.getStream(doc.uuid), doc.contentType, doc.length);
   });
 });
 

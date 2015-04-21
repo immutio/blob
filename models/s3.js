@@ -11,6 +11,6 @@ exports.put = function (id, buf, callback) {
 };
 
 exports.getStream = function (id) {
-  var s3 = new AWS.S3();
-  return s3.getObject({ Bucket: bucket, Key: key(id) }).createReadStream();
+  var s3 = new AWS.S3({ params: { Bucket: bucket, Key: key(id) } });
+  return s3.getObject().createReadStream();
 };
