@@ -9,8 +9,8 @@ var Blob = require('./models/blob'),
 
 if(process.env.REDISCLOUD_URL) {
   var redisUrl = url.parse(process.env.REDISCLOUD_URL);
-  redisClient = redis.createClient(redisURL.port, redisURL.hostname, { no_ready_check: true });
-  redisClient.auth(redisURL.auth.split(":")[1]);
+  redisClient = redis.createClient(redisUrl.port, redisUrl.hostname, { no_ready_check: true });
+  redisClient.auth(redisUrl.auth.split(":")[1]);
 } else {
   redisClient = redis.createClient();
 }
