@@ -61,6 +61,6 @@ Client Libraries
 Limits
 ------
 
-1MB limit on all blobs.
+1MB limit on all blobs, and limit of 1 POST request per second.
 
-Need more space or features? contact hello@immut.io
+Need limits removed? contact hello@immut.io

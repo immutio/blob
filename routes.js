@@ -1,7 +1,22 @@
 var Blob = require('./models/blob'),
     cors = require('cors'),
     fs = require('fs'),
-    indexView = fs.readFileSync('views/index.md');
+    indexView = fs.readFileSync('views/index.md'),
+    rate = require('express-rate'),
+    redis = require('redis'),
+    url = require('url'),
+    redisClient;
+
+if(process.env.REDISCLOUD_URL) {
+  var redisUrl = url.parse(process.env.REDISCLOUD_URL);
+  redisClient = redis.createClient(redisURL.port, redisURL.hostname, { no_ready_check: true });
+  redisClient.auth(redisURL.auth.split(":")[1]);
+} else {
+  redisClient = redis.createClient();
+}
+
+var redisHandler = new rate.Redis.RedisRateHandler({ client: redisClient });
+var limiterMiddleware = rate.middleware({ handler: redisHandler, interval: 1, limit: 1 });
 
 function routes(app) {
   app.get('/', function (req, res) {
@@ -27,8 +42,8 @@ function routes(app) {
   }
 
   app.options('/blobs', cors(app.settings.cors));
-  app.post('/blobs', handleUpload);
-  app.put('/blobs', handleUpload);
+  app.post('/blobs', limiterMiddleware, handleUpload);
+  app.put('/blobs', limiterMiddleware, handleUpload);
 
   app.get('/blobs/:uuid', function (req, res, next) {
     Blob.getBlob(req.params.uuid, function (err, data, type) {
