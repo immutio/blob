@@ -65,6 +65,7 @@ Client Libraries
 ----------------
 
 - [Javascript](http://github.com/immutio/immutio-js-client)
+- [PHP](http://github.com/turanct/immutio/) by [turanct](http://github.com/turanct)
 - [Shell](http://github.com/immutio/immutio-sh-client)
 - Have you written a client library? Submit it to hello@immut.io
 
